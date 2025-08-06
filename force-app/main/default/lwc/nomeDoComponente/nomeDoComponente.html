@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Gerenciador de Tarefas">
+        <div class="slds-m-around_medium">
+            <lightning-input label="Nova tarefa" value={novaTarefa} onchange={handleInput}></lightning-input>
+            <lightning-button label="Adicionar" onclick={addTarefa} class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <div class="slds-m-around_medium">
+            <template if:true={tarefas.length}>
+                <ul>
+                    <template for:each={tarefas} for:item="tarefa">
+                        <li key={tarefa.id} class="slds-p-bottom_x-small">
+                            <lightning-input type="checkbox"
+                                             checked={tarefa.concluida}
+                                             onchange={concluirTarefa}
+                                             data-id={tarefa.id}>
+                            </lightning-input>
+                            <span class={getTarefaClass(tarefa.concluida)}>{tarefa.nome}</span>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:false={tarefas.length}>
+                <p>Nenhuma tarefa cadastrada.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
